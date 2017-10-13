@@ -26,9 +26,6 @@ class Editor extends React.Component<Props> {
           {/* TODO, make Document component */}
           <Document />
         </Paper>
-        <div style={styles.hidden}>
-          <Document id="melons-document" />
-        </div>
       </div>
     )
   }
@@ -37,15 +34,14 @@ class Editor extends React.Component<Props> {
 const styles: { [string]: Object } = {
   wrapper: {
     flex: 1,
+    paddingTop: "12px",
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
     backgroundColor: colors.dim,
   },
   document: {
     transition: "all 0.3s ease-in-out",
-    height: "98%",
   },
   hidden: {
     display: "none",

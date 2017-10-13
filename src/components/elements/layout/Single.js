@@ -22,7 +22,13 @@ class Single extends React.Component<Props> {
   }
 
   render() {
-    return <div>{this.props.content[0]}</div>
+    return (
+      <tr>
+        <td align="center" valign="top" bgcolor="">
+          {this.props.content[0]}
+        </td>
+      </tr>
+    )
   }
 }
 

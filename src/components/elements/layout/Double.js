@@ -3,7 +3,9 @@ import React from "react"
 import _styles, { block } from "../../../styles"
 import colors from "../../../styles/colors"
 
-type Props = {}
+type Props = {
+  content: Array<*>,
+}
 
 /**
  * View and edit properties for a selected element.
@@ -21,7 +23,16 @@ class Double extends React.Component<Props> {
   }
 
   render() {
-    return <div>Text</div>
+    return (
+      <tr>
+        <td align="center" valign="top" bgcolor="">
+          {this.props.content[0]}
+        </td>
+        <td align="center" valign="top" bgcolor="">
+          {this.props.content[1]}
+        </td>
+      </tr>
+    )
   }
 }
 

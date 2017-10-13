@@ -8,6 +8,7 @@ import QuillToolbar from "../../QuillToolbar"
 
 type Props = {
   value: string,
+  edit: boolean,
 }
 
 /**
@@ -27,8 +28,8 @@ class Text extends React.Component<Props> {
     )
   }
 
-  render() {
-    const modules = {
+  renderEdit() {
+    const modules: Object = {
       toolbar: { container: "#quill-toolbar" },
     }
 
@@ -38,6 +39,14 @@ class Text extends React.Component<Props> {
         <Quill value={this.props.value} modules={modules} />
       </div>
     )
+  }
+
+  render() {
+    if (this.props.edit) {
+      return this.renderEdit()
+    } else {
+      return <div dangerouslySetInnerHTML={{ __html: this.props.value }} />
+    }
   }
 }
 
