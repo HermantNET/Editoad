@@ -2,7 +2,7 @@
   "name": "editoad",
   "version": "0.1.0",
   "private": false,
-  "homepage": "http://hermantnet.github.io/editoad",
+  "homepage": "http://tehjr.com/Editoad",
   "dependencies": {
     "create-react-class": "http://registry.npmjs.org/create-react-class/-/create-react-class-15.6.2.tgz",
     "fbjs": "^0.7.2",
@@ -29,6 +29,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "flow": "flow"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
   }
 }
