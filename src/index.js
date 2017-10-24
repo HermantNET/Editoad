@@ -1,8 +1,9 @@
 // @flow
-import React from "react"
+import * as React from "react"
 import ReactDOM from "react-dom"
 import { createStore } from "redux"
 import { Provider } from "react-redux"
+// import { DragDropContext } from "react-dnd"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import injectTapEventPlugin from "react-tap-event-plugin"
 import reducers from "./reducers"
@@ -13,7 +14,10 @@ import App from "./components/App"
 injectTapEventPlugin()
 
 // setup the store
-const store: Object = createStore(reducers)
+const store: Object = createStore(
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 /* render the application to the page. 
    MuiThemeProvider is a dependency for Material-UI components. 

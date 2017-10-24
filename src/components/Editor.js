@@ -1,6 +1,7 @@
 // @flow
 import React from "react"
 import { connect } from "react-redux"
+import type { State } from "../types"
 import Paper from "material-ui/Paper"
 import colors from "../styles/colors"
 import Document from "./Document"
@@ -9,7 +10,7 @@ type Props = {
   size: string,
 }
 
-function mapStateToProps(state: Object): Object {
+function mapStateToProps(state: State): Object {
   return {
     size: state.editor.size,
   }
@@ -23,7 +24,6 @@ class Editor extends React.Component<Props> {
     return (
       <div style={styles.wrapper}>
         <Paper style={Object.assign({}, styles.document, { width: this.props.size })}>
-          {/* TODO, make Document component */}
           <Document />
         </Paper>
       </div>

@@ -1,12 +1,10 @@
 // @flow
 import React from "react"
 import { Quill } from "react-quill"
-import _styles from "../styles"
-import colors from "../styles/colors"
-import { fonts } from "../reducers"
+import { fonts } from "../constants"
 
 const Font: Object = Quill.import("formats/font")
-Font.whitelist = fonts.map(font => font.toLowerCase())
+Font.whitelist = fonts.map(font => font.replace(/ /g, "").toLowerCase())
 Quill.register(Font, true)
 
 type Props = {}
@@ -18,12 +16,15 @@ class Fonts extends React.PureComponent<Props> {
   static renderCss() {
     return (
       <style>
-        .ql-snow .ql-picker.ql-font {"{ width: 150px; }"}
+        .ql-snow .ql-picker.ql-font {"{ width: 130px; font-size: 12px; }"}
         {fonts.map(
           font =>
             `
-            .ql-font span[data-label="${font}"]::before { font-family: "${font}"; }
-            .ql-font-${font.split(" ")[0].toLowerCase()} {font-family: "${font}"; }
+            .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="${font.replace(/ /g, "").toLowerCase()}"]::before,
+            .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="${font.replace(/ /g, "").toLowerCase()}"]::before {
+                content: '${font}';  font-family: '${font}';
+            }
+            .ql-font-${font.replace(/ /g, "").toLowerCase()} {font-family: "${font}"; }
             `
         )}
       </style>
@@ -33,7 +34,7 @@ class Fonts extends React.PureComponent<Props> {
   static renderHtml() {
     return (
       <select className="ql-font">
-        {fonts.map(font => <option value={font.split(" ")[0].toLowerCase()}>{font}</option>)}
+        {fonts.map(font => <option value={font.replace(/ /g, "").toLowerCase()}>{font}</option>)}
         <option selected />
       </select>
     )
@@ -42,7 +43,5 @@ class Fonts extends React.PureComponent<Props> {
     return "Fonts"
   }
 }
-
-const styles = {}
 
 export default Fonts

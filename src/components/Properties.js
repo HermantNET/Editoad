@@ -1,7 +1,5 @@
 // @flow
 import React from "react"
-import _styles from "../styles"
-import colors from "../styles/colors"
 
 type Props = {}
 
@@ -13,7 +11,5 @@ class Properties extends React.Component<Props> {
     return "Properties"
   }
 }
-
-const styles = {}
 
 export default Properties

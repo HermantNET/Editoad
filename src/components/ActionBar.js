@@ -1,6 +1,7 @@
 // @flow
 import React from "react"
 import { connect } from "react-redux"
+import type { State } from "../types"
 import Paper from "material-ui/Paper"
 import { Tabs, Tab } from "material-ui/Tabs"
 import IconButton from "material-ui/IconButton"
@@ -14,7 +15,7 @@ type Props = {
   getCode: Function,
 }
 
-function mapStateToProps(state: Object): Object {
+function mapStateToProps(state: State): Object {
   return {}
 }
 
@@ -36,7 +37,7 @@ class ActionBar extends React.Component<Props> {
   displayFull = () => this.setEditorSize("98%")
   displayLaptop = () => this.setEditorSize("1024px")
   displayTablet = () => this.setEditorSize("768px")
-  displayPhone = () => this.setEditorSize("320px")
+  displayPhone = () => this.setEditorSize("375px")
 
   render() {
     return (

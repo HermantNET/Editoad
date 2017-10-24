@@ -1,6 +1,5 @@
 // @flow
 import colors from "./colors"
-import "./quill.css"
 
 export const block = (flex: number): Object => {
   return {
@@ -18,6 +17,9 @@ const styles: { [string]: Object } = {
   },
   f1: {
     flex: 1,
+  },
+  textPrimary: {
+    color: colors.primary,
   },
   toolbar: {
     height: "48px",
@@ -54,6 +56,12 @@ const styles: { [string]: Object } = {
       marginBottom: "12px",
       color: colors.primary,
     },
+  },
+  isOver: {
+    borderBottom: "4px dashed " + colors.primary,
+  },
+  isOverCell: {
+    boxShadow: "inset 0 0 12px rgba(0,0,0,0.4)",
   },
 }
 

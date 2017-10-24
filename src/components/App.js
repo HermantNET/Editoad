@@ -1,5 +1,9 @@
 // @flow
 import React from "react"
+import { connect } from "react-redux"
+import type { State } from "../types"
+import HTML5Backend from "react-dnd-html5-backend"
+import { DragDropContext } from "react-dnd"
 import Paper from "material-ui/Paper"
 import colors from "../styles/colors"
 import ActionBar from "./ActionBar"
@@ -7,7 +11,19 @@ import Drawer from "./Drawer"
 import Editor from "./Editor"
 import Fonts from "./Fonts"
 
-type Props = {}
+// REDUX
+
+const mapStateToProps = (state: State) => {
+  return {
+    bgColor: state.document.body.style.backgroundColor,
+  }
+}
+
+// COMPONENT
+
+type Props = {
+  bgColor: string,
+}
 
 /**
  * Container Component for the application
@@ -47,4 +63,4 @@ const styles = {
   },
 }
 
-export default App
+export default DragDropContext(HTML5Backend)(connect(mapStateToProps)(App))

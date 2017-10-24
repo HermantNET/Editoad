@@ -1,12 +1,11 @@
 // @flow
 import * as React from "react"
-import _styles from "../../styles"
-import colors from "../../styles/colors"
 
 type Props = {
   id?: string,
+  className?: string,
   align?: "left" | "right" | "center",
-  style: { [string]: string },
+  style?: { [string]: * },
   children: React.Node,
 }
 
@@ -18,19 +17,22 @@ class Table extends React.Component<Props> {
     return (
       <table
         id={this.props.id}
+        className={this.props.className}
         align={this.props.align || "center"}
         border="0"
-        cellpadding="0"
-        cellspacing="0"
+        // cellpadding="0"
+        // cellspacing="0"
         width="100%"
-        style={this.props.style}
+        style={Object.assign(
+          {},
+          { tableLayout: "fixed", boxSizing: "border-box", borderCollapse: "collapse" },
+          this.props.style
+        )}
       >
-        {this.props.children}
+        <tbody>{this.props.children}</tbody>
       </table>
     )
   }
 }
-
-const styles = {}
 
 export default Table

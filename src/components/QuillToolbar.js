@@ -1,7 +1,5 @@
 // @flow
 import React from "react"
-import _styles from "../styles"
-import colors from "../styles/colors"
 import Fonts from "./Fonts"
 
 type Props = {}
@@ -22,7 +20,5 @@ class QuillToolbar extends React.PureComponent<Props> {
     )
   }
 }
-
-const styles = {}
 
 export default QuillToolbar

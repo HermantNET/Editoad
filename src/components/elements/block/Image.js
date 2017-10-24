@@ -1,23 +1,24 @@
 // @flow
 import React from "react"
 import _styles from "../../../styles"
-import colors from "../../../styles/colors"
 
 type Props = {}
 
 /**
  * View and edit properties for a selected element.
  */
-class Button extends React.Component<Props> {
+class Image extends React.Component<Props> {
+  static getType = () => "Image"
+
   static renderThumbnail() {
     return (
       <div style={_styles.thumbnailStyles.wrapper}>
         <div>
           <i style={_styles.thumbnailStyles.icon} className="material-icons">
-            &#xE167;
+            &#xE251;
           </i>
         </div>
-        BUTTON
+        IMAGE
       </div>
     )
   }
@@ -27,6 +28,4 @@ class Button extends React.Component<Props> {
   }
 }
 
-const styles = {}
-
-export default Button
+export default Image

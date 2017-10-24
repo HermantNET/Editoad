@@ -1,9 +1,8 @@
 // @flow
 import React from "react"
 import Quill from "react-quill"
-import theme from "react-quill/dist/quill.snow.css"
+// import theme from "react-quill/dist/quill.snow.css"
 import _styles from "../../../styles"
-import colors from "../../../styles/colors"
 import QuillToolbar from "../../QuillToolbar"
 
 type Props = {
@@ -15,6 +14,8 @@ type Props = {
  * View and edit properties for a selected element.
  */
 class Text extends React.Component<Props> {
+  static getType = () => "Text"
+
   static renderThumbnail() {
     return (
       <div style={_styles.thumbnailStyles.wrapper}>
@@ -49,7 +50,5 @@ class Text extends React.Component<Props> {
     }
   }
 }
-
-const styles = {}
 
 export default Text

@@ -1,22 +1,35 @@
 //@flow
 // CONTENT ELEMENTS
-import React from "react"
-import Button from "./content/Button"
-import Divider from "./content/Divider"
-import Html from "./content/Html"
-import Image from "./content/Image"
-import Text from "./content/Text"
+import * as React from "react"
+import Button from "./block/Button"
+import Divider from "./block/Divider"
+import Html from "./block/Html"
+import Image from "./block/Image"
+import Text from "./block/Text"
+import _Empty from "./block/Empty"
 // LAYOUT ELEMENTS
-import Single from "./layout/Single"
-import Double from "./layout/Double"
-import Triple from "./layout/Triple"
-import Quad from "./layout/Quad"
-import OneTwo from "./layout/OneTwo"
-import TwoOne from "./layout/TwoOne"
-import QuadOneTwo from "./layout/QuadOneTwo"
+import Row from "./TableRow.js"
 
-export const contentElements = { Button, Divider, Html, Image, Text }
-export const layoutElements = { Single, Double, Triple, Quad, OneTwo, TwoOne, QuadOneTwo }
+export const Empty = _Empty
 
-export const contentArray = Object.keys(contentElements).reduce((prev, curr) => prev.concat(contentElements[curr]), [])
+/**
+ * Block elements are the elements that fit inside layout elements. They are the content of the page.
+ */
+export const blockElements: { [string]: React.ComponentType<*> } = { Button, Divider, Html, Image, Text }
+
+/**
+ * Layout elements define the layout of the page. Layout elements are the containers for Block elements.
+ */
+export const layoutElements: { [string]: React.ComponentType<*> } = {
+  Single: Row("Single", [1]),
+  Double: Row("Double", [1, 1]),
+  Triple: Row("Triple", [1, 1, 1]),
+  Quad: Row("Quad", [1, 1, 1, 1]),
+  OneTwo: Row("OneTwo", [1, 2]),
+  TwoOne: Row("TwoOne", [2, 1]),
+  QuadOneTwo: Row("QuadOneTwo", [1, 2, 1, 2]),
+  QuadTwoOne: Row("QuadTwoOne", [2, 1, 2, 1]),
+}
+
+export const blockArray = Object.keys(blockElements).reduce((prev, curr) => prev.concat(blockElements[curr]), [])
 export const layoutArray = Object.keys(layoutElements).reduce((prev, curr) => prev.concat(layoutElements[curr]), [])
