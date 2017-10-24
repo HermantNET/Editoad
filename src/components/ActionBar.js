@@ -21,7 +21,7 @@ function mapStateToProps(state: State): Object {
 
 function mapDispatchToProps(dispatch: Function): Object {
   return {
-    editEditorSize: (size: string) => dispatch(editEditorSize(size)),
+    editEditorSize: (size: number) => dispatch(editEditorSize(size)),
     getCode: () => dispatch(getCode()),
   }
 }
@@ -30,14 +30,14 @@ function mapDispatchToProps(dispatch: Function): Object {
  * Component with shortcuts to common commands
  */
 class ActionBar extends React.Component<Props> {
-  setEditorSize = (size: string) => {
+  setEditorSize = (size: number) => {
     this.props.editEditorSize(size)
   }
 
-  displayFull = () => this.setEditorSize("98%")
-  displayLaptop = () => this.setEditorSize("1024px")
-  displayTablet = () => this.setEditorSize("768px")
-  displayPhone = () => this.setEditorSize("375px")
+  displayFull = () => this.setEditorSize(-1)
+  displayLaptop = () => this.setEditorSize(1024)
+  displayTablet = () => this.setEditorSize(768)
+  displayPhone = () => this.setEditorSize(375)
 
   render() {
     return (

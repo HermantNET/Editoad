@@ -1,13 +1,22 @@
 // @flow
 import React from "react"
+import { connect } from "react-redux"
 import Quill from "react-quill"
-// import theme from "react-quill/dist/quill.snow.css"
+import "react-quill/dist/quill.snow.css"
 import _styles from "../../../styles"
 import QuillToolbar from "../../QuillToolbar"
+import { editBlockValue } from "../../../actions"
+
+const mapDispatchToProps = (dispatch: Function): Object => {
+  return {
+    editBlockValue: value => dispatch(editBlockValue(value)),
+  }
+}
 
 type Props = {
   value: string,
   edit: boolean,
+  editBlockValue: Function,
 }
 
 /**
@@ -29,7 +38,14 @@ class Text extends React.Component<Props> {
     )
   }
 
-  renderEdit() {
+  handleChange = (value: string) => {
+    // if (this.inputTimeout) this.inputTimeout.clearTimeout()
+    // this.inputTimeout = setTimeout(() => {
+    this.props.editBlockValue(value)
+    // }, 50)
+  }
+
+  renderEdit = () => {
     const modules: Object = {
       toolbar: { container: "#quill-toolbar" },
     }
@@ -37,7 +53,7 @@ class Text extends React.Component<Props> {
     return (
       <div>
         <QuillToolbar />
-        <Quill value={this.props.value} modules={modules} />
+        <Quill defaultValue={this.props.value} onChange={this.handleChange} modules={modules} />
       </div>
     )
   }
@@ -51,4 +67,4 @@ class Text extends React.Component<Props> {
   }
 }
 
-export default Text
+export default connect(null, mapDispatchToProps)(Text)

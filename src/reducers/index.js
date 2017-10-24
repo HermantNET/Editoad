@@ -13,15 +13,18 @@ import documentReducer from "./document"
 export default function masterReducer(state: State = defaultState, action: Object): State {
   switch (action.type) {
     // Editor Reducer
+    case actionTypes.EDIT_SELECTED_ELEMENT:
     case actionTypes.EDIT_EDITOR_SIZE: {
-      return set("editor", editorReducer(state.editor, action), state)
+      console.log("REDUX: Accessing editor reducer")
+      return set("editor", editorReducer(state.editor, action, state), state)
     }
 
     // Document Reducer
     case actionTypes.ADD_BLOCK:
-    case actionTypes.ADD_LAYOUT: {
+    case actionTypes.ADD_LAYOUT:
+    case actionTypes.EDIT_BLOCK_VALUE: {
       console.log("REDUX: Accessing document reducer")
-      return set("document", documentReducer(state.document, action), state)
+      return set("document", documentReducer(state.document, action, state), state)
     }
 
     default: {

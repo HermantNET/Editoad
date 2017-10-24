@@ -2,14 +2,14 @@
 import set from "lodash/fp/set"
 import slice from "lodash/fp/slice"
 import drop from "lodash/fp/drop"
-import type { Action, Document, Row } from "../types"
+import type { State, Action, Document, Row } from "../types"
 import * as actionTypes from "../actions/action-types"
 import { newRow, newColumn } from "../generators"
 
 /**
 * Reducer for Document data.
 */
-export default function documentReducer(state: Document, action: Action): Document {
+export default function documentReducer(state: Document, action: Action, rootState: State): Document {
   switch (action.type) {
     case actionTypes.ADD_LAYOUT: {
       const row = newRow(action.layoutType)
@@ -25,11 +25,18 @@ export default function documentReducer(state: Document, action: Action): Docume
 
     case actionTypes.ADD_BLOCK: {
       const { insertAtRowIndex, insertAtCellIndex, blockType } = action
-
       const col = newColumn(blockType, "Placeholder content...", {}, {})
 
       console.log("REDUX (document): Add block", col)
       return set(`body.rows[${insertAtRowIndex}].columns[${insertAtCellIndex}]`, col, state)
+    }
+
+    case actionTypes.EDIT_BLOCK_VALUE: {
+      const { value } = action
+      const { selected_id, selected_rowIndex } = rootState.editor
+
+      console.log("REDUX (document): Edit block value", value)
+      return set(`body.rows[${selected_rowIndex}].columns[0].value`, value, state)
     }
 
     default: {

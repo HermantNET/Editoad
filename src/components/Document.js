@@ -14,6 +14,7 @@ import Table from "./elements/Table"
 const mapStateToProps = (state: State): { document: DocumentType } => {
   return {
     document: state.document,
+    selected_id: state.editor.selected_id,
   }
 }
 
@@ -27,6 +28,7 @@ type Props = {
   id?: string,
   document: DocumentType,
   addLayout: Function,
+  selected_id: string,
 
   // Injected by React DnD:
   connectDropTarget: Function,
@@ -84,6 +86,7 @@ class Document extends React.Component<Props, { isOver: boolean }> {
   }
 
   renderColumn = (col: Column | Object, columns: TDPropertiesArray, i): React.ComponentType<*> | Object => {
+    const { selected_id } = this.props
     let Column: React.ComponentType<*>
     if (col.type === "Empty") {
       Column = Empty
@@ -92,7 +95,7 @@ class Document extends React.Component<Props, { isOver: boolean }> {
     }
 
     columns.push(col)
-    return <Column key={col.id} value={col.value} />
+    return <Column key={col.id} value={col.value} edit={selected_id === col.id} />
   }
 
   renderRow = (row: Row, rowIndex: number): React.ComponentType<*> | Object => {

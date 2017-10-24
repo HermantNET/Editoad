@@ -32,8 +32,10 @@ export type Document = {
 }
 
 export type Editor = {
-  size: string,
+  size: number,
   fonts: Array<string>,
+  selected_id: string,
+  selected_rowIndex: number,
 }
 
 export type State = {

@@ -20,8 +20,10 @@ export const fonts: Array<string> = [
 
 export const defaultState: State = {
   editor: {
-    size: "98%",
+    size: -1,
     fonts,
+    selected_id: "none", // ID of the selected element
+    selected_rowIndex: -1,
   },
   document: {
     // body will be rendered into the rendered documents body.

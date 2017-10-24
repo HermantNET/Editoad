@@ -34,7 +34,11 @@ class Fonts extends React.PureComponent<Props> {
   static renderHtml() {
     return (
       <select className="ql-font">
-        {fonts.map(font => <option value={font.replace(/ /g, "").toLowerCase()}>{font}</option>)}
+        {fonts.map(font => (
+          <option key={font} value={font.replace(/ /g, "").toLowerCase()}>
+            {font}
+          </option>
+        ))}
         <option selected />
       </select>
     )

@@ -51,9 +51,9 @@ export function addBlock(
 }
 // EDIT     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 /**
- * Modify the size of the editor (in pixels)
+ * Set the size of the editor (in pixels)
  */
-export function editEditorSize(size: string): { type: string, size: string } {
+export function editEditorSize(size: number): { type: string, size: number } {
   const type: string = actionTypes.EDIT_EDITOR_SIZE
 
   return {
@@ -62,4 +62,27 @@ export function editEditorSize(size: string): { type: string, size: string } {
   }
 }
 
+/**
+ * Select an element by ID, setting it's to edit mode.
+ */
+export function editSelectedElement(
+  element_id: string,
+  rowIndex: number
+): { type: string, element_id: string, rowIndex: number } {
+  return {
+    type: actionTypes.EDIT_SELECTED_ELEMENT,
+    element_id,
+    rowIndex,
+  }
+}
+
+/**
+ * Edit the value of a block/cell.
+ */
+export function editBlockValue(value: string | number): { type: string, value: string | number } {
+  return {
+    type: actionTypes.EDIT_BLOCK_VALUE,
+    value,
+  }
+}
 // DELETE   *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

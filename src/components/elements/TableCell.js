@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { DropTarget } from "react-dnd"
 import type { TDProperties } from "../../types"
 import { BLOCK } from "../../constants"
-import { addBlock } from "../../actions"
+import { addBlock, editSelectedElement } from "../../actions"
 import _styles from "../../styles"
 
 // REDUX     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -13,6 +13,7 @@ const mapDispatchToProps = (dispatch: Function): { addBlock: Function } => {
   return {
     addBlock: (blockType, insertAtRowIndex, insertAtCellIndex) =>
       dispatch(addBlock(blockType, insertAtRowIndex, insertAtCellIndex)),
+    editSelectedElement: (element_id, rowIndex) => dispatch(editSelectedElement(element_id, rowIndex)),
   }
 }
 
@@ -45,7 +46,9 @@ type Props = {
   content: React.ComponentType<*> | Object,
   data: TDProperties,
   index: number,
+  rowIndex: number,
   flex: number,
+  editSelectedElement: Function,
 
   // Injected by React DnD:
   connectDropTarget: Function,
@@ -76,12 +79,18 @@ class TableCell extends React.Component<Props, { isOver: boolean }> {
     }
   }
 
+  selectElement = event => {
+    event.stopPropagation()
+    const { editSelectedElement, rowIndex, data: { id } } = this.props
+    editSelectedElement(id, rowIndex)
+  }
+
   render() {
     const { isOver, connectDropTarget, content, flex, data: { align, valign, styleOuter, styleInner } } = this.props
     const isOverStyle: Object = isOver ? _styles.isOverCell : {}
 
     return connectDropTarget(
-      <td style={styleOuter} align={align} valign={valign} colSpan={flex}>
+      <td style={styleOuter} align={align} valign={valign} colSpan={flex} onTouchTap={this.selectElement}>
         <div style={Object.assign({}, styleInner, isOverStyle)}>{content}</div>
       </td>
     )
