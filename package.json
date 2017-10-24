@@ -1,7 +1,8 @@
 {
-  "name": "melons",
+  "name": "editoad",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "http://hermantnet.github.io/editoad",
   "dependencies": {
     "create-react-class": "http://registry.npmjs.org/create-react-class/-/create-react-class-15.6.2.tgz",
     "fbjs": "^0.7.2",
