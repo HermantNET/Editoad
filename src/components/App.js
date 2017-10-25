@@ -33,6 +33,7 @@ class App extends React.Component<Props> {
     return (
       <div style={styles.wrapper}>
         {Fonts.renderCss()}
+        <style>{"img {max-width: 100%;}"}</style>
         <div style={styles.left}>
           <ActionBar />
           <Editor />

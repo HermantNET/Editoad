@@ -37,9 +37,16 @@ class Drawer extends React.Component<Props> {
 const styles = {
   wrapper: {
     color: colors.light,
+    height: "100vh",
+    overflowX: "hidden",
+    overflowY: "hidden",
   },
   tab: {
+    height: "calc(100% - 48px - 4rem)",
     padding: "0.6rem 0.4rem",
+    paddingBottom: "4rem",
+    overflowX: "hidden",
+    overflowY: "scroll",
   },
 }
 

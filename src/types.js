@@ -36,6 +36,7 @@ export type Editor = {
   fonts: Array<string>,
   selected_id: string,
   selected_rowIndex: number,
+  selected_cellIndex: number,
 }
 
 export type State = {

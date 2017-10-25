@@ -13,7 +13,8 @@ const mapDispatchToProps = (dispatch: Function): { addBlock: Function } => {
   return {
     addBlock: (blockType, insertAtRowIndex, insertAtCellIndex) =>
       dispatch(addBlock(blockType, insertAtRowIndex, insertAtCellIndex)),
-    editSelectedElement: (element_id, rowIndex) => dispatch(editSelectedElement(element_id, rowIndex)),
+    editSelectedElement: (element_id, rowIndex, cellIndex) =>
+      dispatch(editSelectedElement(element_id, rowIndex, cellIndex)),
   }
 }
 
@@ -81,8 +82,8 @@ class TableCell extends React.Component<Props, { isOver: boolean }> {
 
   selectElement = event => {
     event.stopPropagation()
-    const { editSelectedElement, rowIndex, data: { id } } = this.props
-    editSelectedElement(id, rowIndex)
+    const { editSelectedElement, rowIndex, index, data: { id } } = this.props
+    editSelectedElement(id, rowIndex, index)
   }
 
   render() {

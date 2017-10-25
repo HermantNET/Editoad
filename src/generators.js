@@ -13,32 +13,31 @@ export function newRow(type: RowTypes): Row {
     id: uuid(),
     type,
     flex,
-    columns: flex.map(() => newColumn()),
+    columns: flex.map(() =>
+      newColumn("Empty", "Empty", {
+        align: "center",
+        styleInner: {
+          margin: "2px",
+          padding: "12px",
+          backgroundColor: colors.primary,
+          color: colors.light,
+          borderRadius: "4px",
+        },
+      })
+    ),
   }
 }
 
 /**
  * Returns a new Column.
  */
-export function newColumn(
-  type: ContentTypes = "Empty",
-  value: string = "Empty",
-  styleOuter: style = {},
-  styleInner: style = {
-    margin: "2px",
-    padding: "12px",
-    backgroundColor: colors.primary,
-    color: colors.light,
-    borderRadius: "4px",
+export function newColumn(type: ContentTypes, value: string, options: Object): Column {
+  const defaultColumn: Object = {
+    styleOuter: {},
+    styleInner: {},
+    align: "left",
+    valign: "top",
   }
-): Column {
-  return {
-    id: uuid(),
-    type,
-    align: "center",
-    valign: "middle",
-    styleOuter,
-    styleInner,
-    value,
-  }
+
+  return Object.assign({}, defaultColumn, options, { id: uuid(), type, value })
 }

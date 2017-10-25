@@ -81,7 +81,8 @@ const styles: { [string]: Object } = {
     alignItems: "flex-start",
     justifyContent: "center",
     backgroundColor: colors.dim,
-    overflow: "hidden",
+    overflowX: "hidden",
+    overflowY: "scroll",
   },
   document: {
     float: "left",

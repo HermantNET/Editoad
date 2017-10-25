@@ -24,7 +24,7 @@ class Divider extends React.Component<Props> {
   }
 
   render() {
-    return <div>Text</div>
+    return <div>Divider</div>
   }
 }
 

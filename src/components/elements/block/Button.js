@@ -24,7 +24,7 @@ class Button extends React.Component<Props> {
   }
 
   render() {
-    return <div>Text</div>
+    return <div>Button</div>
   }
 }
 

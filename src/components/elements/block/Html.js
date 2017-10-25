@@ -24,7 +24,7 @@ class HTML extends React.Component<Props> {
   }
 
   render() {
-    return <div>Text</div>
+    return <div>HTML</div>
   }
 }
 

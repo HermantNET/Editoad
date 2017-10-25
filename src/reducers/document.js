@@ -25,7 +25,7 @@ export default function documentReducer(state: Document, action: Action, rootSta
 
     case actionTypes.ADD_BLOCK: {
       const { insertAtRowIndex, insertAtCellIndex, blockType } = action
-      const col = newColumn(blockType, "Placeholder content...", {}, {})
+      const col = newColumn(blockType, "", {})
 
       console.log("REDUX (document): Add block", col)
       return set(`body.rows[${insertAtRowIndex}].columns[${insertAtCellIndex}]`, col, state)
@@ -33,10 +33,10 @@ export default function documentReducer(state: Document, action: Action, rootSta
 
     case actionTypes.EDIT_BLOCK_VALUE: {
       const { value } = action
-      const { selected_id, selected_rowIndex } = rootState.editor
+      const { selected_id, selected_rowIndex, selected_cellIndex } = rootState.editor
 
       console.log("REDUX (document): Edit block value", value)
-      return set(`body.rows[${selected_rowIndex}].columns[0].value`, value, state)
+      return set(`body.rows[${selected_rowIndex}].columns[${selected_cellIndex}].value`, value, state)
     }
 
     default: {

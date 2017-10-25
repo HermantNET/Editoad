@@ -22,6 +22,7 @@ export default function editorReducer(state: Editor, action: Object, rootState: 
         return Object.assign({}, state, {
           selected_id: action.element_id,
           selected_rowIndex: action.rowIndex,
+          selected_cellIndex: action.cellIndex,
         })
       }
     }

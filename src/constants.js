@@ -24,6 +24,7 @@ export const defaultState: State = {
     fonts,
     selected_id: "none", // ID of the selected element
     selected_rowIndex: -1,
+    selected_cellIndex: -1,
   },
   document: {
     // body will be rendered into the rendered documents body.

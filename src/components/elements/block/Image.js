@@ -24,7 +24,7 @@ class Image extends React.Component<Props> {
   }
 
   render() {
-    return <div>Text</div>
+    return <div>Image</div>
   }
 }
 

@@ -67,12 +67,14 @@ export function editEditorSize(size: number): { type: string, size: number } {
  */
 export function editSelectedElement(
   element_id: string,
-  rowIndex: number
-): { type: string, element_id: string, rowIndex: number } {
+  rowIndex: number,
+  cellIndex: number
+): { type: string, element_id: string, rowIndex: number, cellIndex: number } {
   return {
     type: actionTypes.EDIT_SELECTED_ELEMENT,
     element_id,
     rowIndex,
+    cellIndex,
   }
 }
 
