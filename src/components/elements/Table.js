@@ -14,23 +14,19 @@ type Props = {
  */
 class Table extends React.Component<Props> {
   render() {
+    const { align, style, children, ...props } = this.props
     return (
       <table
-        id={this.props.id}
-        className={this.props.className}
         align={this.props.align || "center"}
         border="0"
         // cellpadding="0"
         // cellspacing="0"
         width="100%"
         height="100%"
-        style={Object.assign(
-          {},
-          { tableLayout: "fixed", boxSizing: "border-box", borderCollapse: "collapse" },
-          this.props.style
-        )}
+        style={Object.assign({}, { tableLayout: "fixed", boxSizing: "border-box", borderCollapse: "collapse" }, style)}
+        {...props}
       >
-        <tbody>{this.props.children}</tbody>
+        <tbody>{children}</tbody>
       </table>
     )
   }

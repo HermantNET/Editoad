@@ -8,6 +8,7 @@ import { BLOCK } from "../../constants"
 import { addBlock, editSelectedElement, moveCell, deleteCell } from "../../actions"
 import { blockElements } from "./index"
 import _styles from "../../styles"
+import colors from "../../styles/colors"
 
 // REDUX     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 const mapDispatchToProps = (dispatch: Function): { addBlock: Function } => {
@@ -206,8 +207,8 @@ const styles: Object = {
     right: "2px",
     bottom: "2px",
     position: "absolute",
-    background: "rgba(0,0,0,0.2)",
-    color: "rgba(255,255,255,0.9)",
+    background: colors.menuBg,
+    color: colors.menuText,
     width: "50px",
     height: "100%",
     borderRadius: "4px",

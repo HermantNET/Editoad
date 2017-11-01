@@ -5,6 +5,7 @@ import slice from "lodash/fp/slice"
 import drop from "lodash/fp/drop"
 import assign from "lodash/fp/assign"
 import flow from "lodash/fp/flow"
+import pullAt from "lodash/fp/pullAt"
 import type { State, Action, Document, Row } from "../types"
 import * as actionTypes from "../actions/action-types"
 import { newRow, newColumn, emptyCol } from "../generators"
@@ -101,6 +102,12 @@ export default function documentReducer(state: Document, action: Action, rootSta
       const { cellRowIndex, cellIndex } = action
       console.log("REDUX (document): Delete cell", cellRowIndex, cellIndex)
       return set(`body.rows[${cellRowIndex}].columns[${cellIndex}]`, emptyCol(), state)
+    }
+
+    case actionTypes.DELETE_ROW: {
+      const { rowIndex } = action
+      console.log("REDUX (document): Delete row", rowIndex)
+      return set(`body.rows`, pullAt([rowIndex], state.body.rows), state)
     }
 
     default: {

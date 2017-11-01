@@ -9,6 +9,7 @@ import { addLayout } from "../actions"
 import Fonts from "./Fonts"
 import { blockElements, layoutElements, Empty } from "./elements"
 import Table from "./elements/Table"
+import Layout from "./elements/Layout"
 
 type Props = {
   id?: string,
@@ -101,7 +102,7 @@ class Document extends React.Component<Props, { isOver: boolean }> {
   }
 
   renderRow = (row: Row, rowIndex: number): React.ComponentType<*> | Object => {
-    const Layout: React.ComponentType<*> = layoutElements[row.type]
+    const Component: React.ComponentType<*> = layoutElements[row.type]
     const columnData = []
     const content: Array<
       React.ComponentType<*> | Object
@@ -109,11 +110,7 @@ class Document extends React.Component<Props, { isOver: boolean }> {
       this.renderColumn(col, columnData, i)
     )
 
-    return (
-      <Table key={row.id}>
-        <Layout content={content} data={columnData} rowIndex={rowIndex} />
-      </Table>
-    )
+    return <Layout key={row.id} Component={Component} rowIndex={rowIndex} columnData={columnData} content={content} />
   }
 
   renderRows = () => {

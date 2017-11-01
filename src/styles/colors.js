@@ -9,6 +9,8 @@ const colors: { [string]: string } = {
   dimmer: blueGrey800,
   dark: "#000000",
   accent: red500,
+  menuBg: "rgba(0,0,0,0.2)",
+  menuText: "rgba(255,255,255,0.9)",
 }
 
 export default colors

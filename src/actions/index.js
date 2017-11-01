@@ -162,7 +162,29 @@ export function moveCell(
     targetCellIndex,
   }
 }
+
+/**
+ * Switches data between 2 rows.
+ */
+export function moveRow(
+  rowIndex: number,
+  targetRowIndex: number
+): {
+  type: string,
+  rowIndex: number,
+  targetRowIndex: number,
+} {
+  return {
+    type: actionTypes.MOVE_CELL,
+    rowIndex,
+    targetRowIndex,
+  }
+}
 // DELETE   *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+/**
+ * Set a cell to empty at a given row and cell index.
+ */
 export function deleteCell(
   cellRowIndex: number,
   cellIndex: number
@@ -175,5 +197,20 @@ export function deleteCell(
     type: actionTypes.DELETE_CELL,
     cellRowIndex,
     cellIndex,
+  }
+}
+
+/**
+ * Delete a row from the document at the given row index. 
+ */
+export function deleteRow(
+  rowIndex: number
+): {
+  type: string,
+  rowIndex: number,
+} {
+  return {
+    type: actionTypes.DELETE_ROW,
+    rowIndex,
   }
 }

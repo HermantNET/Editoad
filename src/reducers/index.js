@@ -41,6 +41,7 @@ export default function masterReducer(state: State = defaultState, action: Objec
     case actionTypes.EDIT_BLOCK_STYLE:
     case actionTypes.EDIT_BLOCK_ALIGNMENTS:
     case actionTypes.DELETE_CELL:
+    case actionTypes.DELETE_ROW:
     case actionTypes.EDIT_BLOCK_VALUE: {
       console.log("REDUX: Accessing document reducer")
       return set("document", documentReducer(altered_state.document, action, altered_state), altered_state)
