@@ -1,19 +1,28 @@
 // @flow
 import * as React from "react"
+import { connect } from "react-redux"
 import { DropTarget } from "react-dnd"
+import { addLayout } from "../../actions"
 import { LAYOUT } from "../../constants"
 import TableCell from "../../components/elements/TableCell"
 import type { TDPropertiesArray } from "../../types"
 import _styles, { block } from "../../styles"
 
 export default function(type: string, flex: Array<number>): React.ComponentType<*> {
-  // REACT DnD *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  // REDUX   *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  const mapDispatchToProps = (dispatch: Function): { [string]: Function } => {
+    return {
+      addLayout: (type: string, insertAtIndex: number) => dispatch(addLayout(type, insertAtIndex)),
+    }
+  }
+
+  // REACT DnD *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
   const documentTarget = {
     drop(props: Object, monitor: Object, component: React.ComponentType<*>) {
       // Obtain the dragged item
       const item: Object = monitor.getItem()
-      alert(item.type)
+      props.addLayout(item.type, props.rowIndex)
     },
   }
 
@@ -30,7 +39,7 @@ export default function(type: string, flex: Array<number>): React.ComponentType<
     }
   }
 
-  // COMPONENT *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  // COMPONENT *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
   type Props = {
     data: TDPropertiesArray,
@@ -90,5 +99,5 @@ export default function(type: string, flex: Array<number>): React.ComponentType<
     }
   }
 
-  return DropTarget(LAYOUT, documentTarget, collect)(Component)
+  return connect(null, mapDispatchToProps)(DropTarget(LAYOUT, documentTarget, collect)(Component))
 }

@@ -1,30 +1,19 @@
 // @flow
 import React from "react"
-import _styles from "../../../styles"
-
-type Props = {}
+import Block, { BlockThumbnail } from "../Block"
 
 /**
- * View and edit properties for a selected element.
+ * Divider Block element.
  */
-class Divider extends React.Component<Props> {
+class Divider extends Block {
   static getType = () => "Divider"
 
-  static renderThumbnail() {
-    return (
-      <div style={_styles.thumbnailStyles.wrapper}>
-        <div>
-          <i style={_styles.thumbnailStyles.icon} className="material-icons">
-            &#xE15B;
-          </i>
-        </div>
-        DIVIDER
-      </div>
-    )
+  renderThumbnail() {
+    return BlockThumbnail("DIVIDER", "remove")
   }
 
-  render() {
-    return <div>Divider</div>
+  renderEdit = () => {
+    return "Divider Edit"
   }
 }
 

@@ -1,7 +1,8 @@
 // @flow
 import * as React from "react"
 import ReactDOM from "react-dom"
-import { createStore } from "redux"
+import { createStore, applyMiddleware } from "redux"
+import thunk from "redux-thunk"
 import { Provider } from "react-redux"
 // import { DragDropContext } from "react-dnd"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
@@ -16,7 +17,8 @@ injectTapEventPlugin()
 // setup the store
 const store: Object = createStore(
   reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk)
 )
 
 /* render the application to the page. 

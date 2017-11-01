@@ -86,4 +86,5 @@ export const defaultState: State = {
       ],
     },
   },
+  documentHtml: "",
 }

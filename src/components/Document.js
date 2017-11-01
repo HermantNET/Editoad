@@ -6,8 +6,21 @@ import type { State, Row, Column, Document as DocumentType, TDPropertiesArray } 
 import { LAYOUT } from "../constants"
 import _styles from "../styles"
 import { addLayout } from "../actions"
+import Fonts from "./Fonts"
 import { blockElements, layoutElements, Empty } from "./elements"
 import Table from "./elements/Table"
+
+type Props = {
+  id?: string,
+  hidden?: boolean,
+  document: DocumentType,
+  addLayout: Function,
+  selected_id: string,
+
+  // Injected by React DnD:
+  connectDropTarget: Function,
+  isOver: boolean,
+}
 
 // REDUX *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -22,17 +35,6 @@ const mapDispatchToProps = (dispatch: Function): { [string]: Function } => {
   return {
     addLayout: (type: string, insertAtIndex: number) => dispatch(addLayout(type, insertAtIndex)),
   }
-}
-
-type Props = {
-  id?: string,
-  document: DocumentType,
-  addLayout: Function,
-  selected_id: string,
-
-  // Injected by React DnD:
-  connectDropTarget: Function,
-  isOver: boolean,
 }
 
 // REACT DnD *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -120,13 +122,19 @@ class Document extends React.Component<Props, { isOver: boolean }> {
   }
 
   render() {
-    const { connectDropTarget, document } = this.props
+    const { connectDropTarget, document, id, hidden } = this.props
     const { isOver } = this.state
     const isOverStyle: Object = isOver ? _styles.isOver : {}
 
     return connectDropTarget(
-      <div>
-        <Table id={this.props.id} style={{ backgroundColor: document.body.style.backgroundColor, minHeight: "240px" }}>
+      <div id={id} style={{ display: hidden ? "none" : "block" }}>
+        {Fonts.renderCss()}
+        <style>
+          {
+            "img {max-width: 100%;} .ql-container.ql-snow{border:none;font-size:unset!important;} .ql-snow .ql-editor{padding:0;} .ql-editor p{padding:unset;margin:1em 0;}"
+          }
+        </style>
+        <Table style={{ backgroundColor: document.body.style.backgroundColor, minHeight: "240px" }}>
           <tr>
             <td style={document.body.style} align="center" valign="top">
               <div style={isOverStyle}>{this.renderRows()}</div>

@@ -23,6 +23,7 @@ class Table extends React.Component<Props> {
         // cellpadding="0"
         // cellspacing="0"
         width="100%"
+        height="100%"
         style={Object.assign(
           {},
           { tableLayout: "fixed", boxSizing: "border-box", borderCollapse: "collapse" },

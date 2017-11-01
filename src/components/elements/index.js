@@ -1,9 +1,9 @@
 //@flow
 // CONTENT ELEMENTS
 import * as React from "react"
-import Button from "./block/Button"
-import Divider from "./block/Divider"
-import Html from "./block/Html"
+// import Button from "./block/Button"
+// import Divider from "./block/Divider"
+// import Html from "./block/Html"
 import Image from "./block/Image"
 import Text from "./block/Text"
 import _Empty from "./block/Empty"
@@ -15,7 +15,7 @@ export const Empty = _Empty
 /**
  * Block elements are the elements that fit inside layout elements. They are the content of the page.
  */
-export const blockElements: { [string]: React.ComponentType<*> } = { Button, Divider, Html, Image, Text }
+export const blockElements: { [string]: React.ComponentType<*> } = { /* Button, Divider, Html,*/ Image, Text }
 
 /**
  * Layout elements define the layout of the page. Layout elements are the containers for Block elements.

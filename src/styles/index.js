@@ -21,6 +21,9 @@ const styles: { [string]: Object } = {
   textPrimary: {
     color: colors.primary,
   },
+  text_center: {
+    textAlign: "center",
+  },
   toolbar: {
     height: "48px",
     zIndex: 1,
@@ -31,6 +34,7 @@ const styles: { [string]: Object } = {
     wrapper: {
       textAlign: "center",
       padding: "12px",
+      cursor: "pointer",
     },
     icon: {
       fontSize: "72px",
@@ -63,6 +67,46 @@ const styles: { [string]: Object } = {
   isOverCell: {
     boxShadow: "inset 0 0 12px rgba(0,0,0,0.4)",
   },
+  editBox: {
+    textAlign: "center",
+  },
+  propertyGroup: {
+    marginBottom: "12px",
+    display: "flex",
+    justifyContent: "space-between",
+  },
 }
 
-export default styles
+const margin = (() => {
+  return [0, 4, 8, 12, 16].reduce(
+    (acc, px, i) =>
+      Object.assign({}, acc, {
+        [`m_${i}`]: { margin: `${px}px` },
+        [`ml_${i}`]: { marginLeft: `${px}px` },
+        [`mr_${i}`]: { marginRight: `${px}px` },
+        [`mt_${i}`]: { marginTop: `${px}px` },
+        [`mb_${i}`]: { marginBottom: `${px}px` },
+        [`mx_${i}`]: { marginLeft: `${px}px`, marginRight: `${px}px` },
+        [`my_${i}`]: { marginTop: `${px}px`, marginBottom: `${px}px` },
+      }),
+    {}
+  )
+})()
+
+const padding = (() => {
+  return [0, 4, 8, 12, 16].reduce(
+    (acc, px, i) =>
+      Object.assign({}, acc, {
+        [`p_${i}`]: { padding: `${px}px` },
+        [`pl_${i}`]: { paddingLeft: `${px}px` },
+        [`pr_${i}`]: { paddingRight: `${px}px` },
+        [`pt_${i}`]: { paddingTop: `${px}px` },
+        [`pb_${i}`]: { paddingBottom: `${px}px` },
+        [`px_${i}`]: { paddingLeft: `${px}px`, paddingRight: `${px}px` },
+        [`py_${i}`]: { paddingTop: `${px}px`, paddingBottom: `${px}px` },
+      }),
+    {}
+  )
+})()
+
+export default Object.assign({}, styles, margin, padding)

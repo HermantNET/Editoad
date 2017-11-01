@@ -42,6 +42,7 @@ export type Editor = {
 export type State = {
   editor: Editor,
   document: Document,
+  documentHtml: string,
 }
 
 export type Action = Object & {

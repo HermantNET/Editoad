@@ -1,5 +1,6 @@
 // @flow
 import set from "lodash/fp/set"
+import styleData from "style-data"
 import type { State } from "../types"
 import { defaultState } from "../constants"
 import * as actionTypes from "../actions/action-types"
@@ -11,6 +12,8 @@ import documentReducer from "./document"
 * non-visual start here.
 */
 export default function masterReducer(state: State = defaultState, action: Object): State {
+  let altered_state: State = state
+
   switch (action.type) {
     // Editor Reducer
     case actionTypes.EDIT_SELECTED_ELEMENT:
@@ -20,11 +23,40 @@ export default function masterReducer(state: State = defaultState, action: Objec
     }
 
     // Document Reducer
+    case actionTypes.MOVE_CELL:
     case actionTypes.ADD_BLOCK:
-    case actionTypes.ADD_LAYOUT:
+    case actionTypes.ADD_LAYOUT: {
+      console.log("REDUX: Resetting selected element")
+      altered_state = set(
+        "editor",
+        Object.assign({}, altered_state.editor, {
+          selected_id: "none",
+          selected_rowIndex: -1,
+          selected_cellIndex: -1,
+        }),
+        altered_state
+      )
+    }
+    case actionTypes.EDIT_BODY_STYLE:
+    case actionTypes.EDIT_BLOCK_STYLE:
+    case actionTypes.EDIT_BLOCK_ALIGNMENTS:
+    case actionTypes.DELETE_CELL:
     case actionTypes.EDIT_BLOCK_VALUE: {
       console.log("REDUX: Accessing document reducer")
-      return set("document", documentReducer(state.document, action, state), state)
+      return set("document", documentReducer(altered_state.document, action, altered_state), altered_state)
+    }
+
+    case actionTypes.GET_CODE: {
+      const container: HTMLElement | null = document.getElementById("melons-document")
+      let code: string = ""
+      styleData(
+        container.innerHTML.replace(/ draggable="true"| style=""/g, ""),
+        { removeStyleTags: true, applyStyleTags: true },
+        (err, result) => (code = result.html)
+      )
+
+      console.log("REDUX: Getting code", code)
+      return set("documentHtml", code, state)
     }
 
     default: {

@@ -1,30 +1,19 @@
 // @flow
 import React from "react"
-import _styles from "../../../styles"
-
-type Props = {}
+import Block, { BlockThumbnail } from "../Block"
 
 /**
- * View and edit properties for a selected element.
+ * Button Block element.
  */
-class Button extends React.Component<Props> {
+class Button extends Block {
   static getType = () => "Button"
 
-  static renderThumbnail() {
-    return (
-      <div style={_styles.thumbnailStyles.wrapper}>
-        <div>
-          <i style={_styles.thumbnailStyles.icon} className="material-icons">
-            &#xE167;
-          </i>
-        </div>
-        BUTTON
-      </div>
-    )
+  renderThumbnail() {
+    return BlockThumbnail("BUTTON", "font_download")
   }
 
-  render() {
-    return <div>Button</div>
+  renderEdit = () => {
+    return "Button Edit"
   }
 }
 

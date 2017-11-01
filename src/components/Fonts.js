@@ -7,6 +7,10 @@ const Font: Object = Quill.import("formats/font")
 Font.whitelist = fonts.map(font => font.replace(/ /g, "").toLowerCase())
 Quill.register(Font, true)
 
+const SizeStyle = Quill.import("attributors/style/size")
+SizeStyle.whitelist = ["10px", "12px", "14px", "16px", "20px", "24px", "36px", "72px"]
+Quill.register(SizeStyle, true)
+
 type Props = {}
 
 /**
@@ -20,12 +24,12 @@ class Fonts extends React.PureComponent<Props> {
         {fonts.map(
           font =>
             `
-            .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="${font.replace(/ /g, "").toLowerCase()}"]::before,
-            .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="${font.replace(/ /g, "").toLowerCase()}"]::before {
-                content: '${font}';  font-family: '${font}';
-            }
-            .ql-font-${font.replace(/ /g, "").toLowerCase()} {font-family: "${font}"; }
-            `
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="${font.replace(/ /g, "").toLowerCase()}"]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value="${font.replace(/ /g, "").toLowerCase()}"]::before {
+content: '${font}';  font-family: '${font}';
+}
+.ql-font-${font.replace(/ /g, "").toLowerCase()} {font-family: "${font}"; }
+`
         )}
       </style>
     )
@@ -33,18 +37,23 @@ class Fonts extends React.PureComponent<Props> {
 
   static renderHtml() {
     return (
-      <select className="ql-font">
-        {fonts.map(font => (
-          <option key={font} value={font.replace(/ /g, "").toLowerCase()}>
-            {font}
-          </option>
-        ))}
-        <option selected />
-      </select>
+      <span className="ql-formats">
+        <select className="ql-font" defaultValue="">
+          {fonts.map(font => (
+            <option key={font} value={font.replace(/ /g, "").toLowerCase()}>
+              {font}
+            </option>
+          ))}
+          <option value="" />
+        </select>
+        <select className="ql-size" defaultValue="12px">
+          {SizeStyle.whitelist.map(px => <option key={px}>{px}</option>)}
+        </select>
+      </span>
     )
   }
   render() {
-    return "Fonts"
+    return <p>Fonts</p>
   }
 }
 

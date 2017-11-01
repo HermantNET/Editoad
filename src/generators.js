@@ -1,7 +1,7 @@
 // @flow
 import uuid from "uuid/v4"
 import { layoutElements } from "./components/elements"
-import type { Row, RowTypes, ContentTypes, Column, style } from "./types"
+import type { Row, RowTypes, ContentTypes, Column } from "./types"
 import colors from "./styles/colors"
 
 /**
@@ -13,19 +13,27 @@ export function newRow(type: RowTypes): Row {
     id: uuid(),
     type,
     flex,
-    columns: flex.map(() =>
-      newColumn("Empty", "Empty", {
-        align: "center",
-        styleInner: {
-          margin: "2px",
-          padding: "12px",
-          backgroundColor: colors.primary,
-          color: colors.light,
-          borderRadius: "4px",
-        },
-      })
-    ),
+    columns: flex.map(() => emptyCol()),
   }
+}
+
+export function emptyCol(): Column {
+  return newColumn("Empty", "Empty", {
+    align: "center",
+    valign: "middle",
+    styleInner: {
+      verticalAlign: "middle",
+      padding: "12px",
+      height: "100%",
+      backgroundColor: colors.primary,
+      color: colors.light,
+      borderRadius: "4px",
+      userSelect: "none",
+    },
+    styleOuter: {
+      padding: "2px",
+    },
+  })
 }
 
 /**

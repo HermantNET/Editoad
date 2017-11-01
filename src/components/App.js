@@ -9,7 +9,6 @@ import colors from "../styles/colors"
 import ActionBar from "./ActionBar"
 import Drawer from "./Drawer"
 import Editor from "./Editor"
-import Fonts from "./Fonts"
 
 // REDUX
 
@@ -32,8 +31,6 @@ class App extends React.Component<Props> {
   render() {
     return (
       <div style={styles.wrapper}>
-        {Fonts.renderCss()}
-        <style>{"img {max-width: 100%;}"}</style>
         <div style={styles.left}>
           <ActionBar />
           <Editor />

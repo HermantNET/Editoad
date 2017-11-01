@@ -1,11 +1,9 @@
 // @flow
 import React from "react"
 import { connect } from "react-redux"
+import { editBodyStyle } from "../actions"
 import type { State } from "../types"
-
-type Props = {
-  style: Object,
-}
+import _styles from "../styles"
 
 const mapStateToProps = (state: State): Object => {
   return {
@@ -13,34 +11,69 @@ const mapStateToProps = (state: State): Object => {
   }
 }
 
+const mapDispatchToProps = (dispatch: Function): { [string]: Function } => {
+  return {
+    editBodyStyle: style => dispatch(editBodyStyle(style)),
+  }
+}
+
+type Props = {
+  style: Object,
+  editBodyStyle: Function,
+}
+
 /**
  * View and edit properties for a selected element.
  */
-class Settings extends React.Component<Props> {
+class Settings extends React.Component<Props, *> {
+  constructor(props: Props) {
+    super(props)
+
+    this.state = {
+      style: {},
+    }
+  }
+
+  // styleInner handler
+  bodyStyleChange = e => {
+    const { editBodyStyle } = this.props
+    let timeout
+    this.setState(
+      {
+        style: Object.assign({}, this.state.style, { [e.target.name]: e.target.value }),
+      },
+      () => {
+        timeout && timeout.clearTimeout()
+        timeout = setTimeout(() => {
+          editBodyStyle(this.state.style)
+        }, 100)
+      }
+    )
+  }
+
   render() {
     return (
       <div>
-        <div style={styles.propertyGroup}>
+        <div style={_styles.propertyGroup}>
           <label>Background Color: </label>
-          <input type="color" defaultValue={this.props.style.backgroundColor} />
+          <input
+            type="color"
+            name="backgroundColor"
+            onChange={this.bodyStyleChange}
+            defaultValue={this.props.style.backgroundColor}
+          />
         </div>
-        <div style={styles.propertyGroup}>
+        <div style={_styles.propertyGroup}>
           <label>Text Color: </label>
-          <input type="color" defaultValue={this.props.style.color} />
+          <input type="color" name="color" onChange={this.bodyStyleChange} defaultValue={this.props.style.color} />
         </div>
-        <div style={styles.propertyGroup}>
+        <div style={_styles.propertyGroup}>
           <label>Padding: </label>
-          <input type="text" defaultValue={this.props.style.padding} />
+          <input type="text" name="padding" onChange={this.bodyStyleChange} defaultValue={this.props.style.padding} />
         </div>
       </div>
     )
   }
 }
 
-const styles = {
-  propertyGroup: {
-    marginBottom: "12px",
-  },
-}
-
-export default connect(mapStateToProps)(Settings)
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)

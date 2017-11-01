@@ -6,6 +6,14 @@ import * as React from "react"
  */
 export default class Empty extends React.Component<{ value: string }> {
   render() {
-    return <div>{this.props.value}</div>
+    return (
+      <table height="100%">
+        <tbody>
+          <tr>
+            <td valign="middle">{this.props.value}</td>
+          </tr>
+        </tbody>
+      </table>
+    )
   }
 }

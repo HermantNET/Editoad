@@ -1,11 +1,13 @@
 // @flow
 import React from "react"
 import { connect } from "react-redux"
-import type { State } from "../types"
+import { prettyPrint } from "html"
 import Paper from "material-ui/Paper"
 import { Tabs, Tab } from "material-ui/Tabs"
 import IconButton from "material-ui/IconButton"
 import FontIcon from "material-ui/FontIcon"
+import Dialog from "material-ui/Dialog"
+import type { State } from "../types"
 import _styles from "../styles"
 import colors from "../styles/colors"
 import { editEditorSize, getCode } from "../actions"
@@ -13,10 +15,13 @@ import { editEditorSize, getCode } from "../actions"
 type Props = {
   editEditorSize: Function,
   getCode: Function,
+  code: string,
 }
 
 function mapStateToProps(state: State): Object {
-  return {}
+  return {
+    code: state.documentHtml,
+  }
 }
 
 function mapDispatchToProps(dispatch: Function): Object {
@@ -29,7 +34,15 @@ function mapDispatchToProps(dispatch: Function): Object {
 /**
  * Component with shortcuts to common commands
  */
-class ActionBar extends React.Component<Props> {
+class ActionBar extends React.Component<Props, { codeDialog: boolean }> {
+  constructor(props: Props) {
+    super(props)
+
+    this.state = {
+      codeDialog: false,
+    }
+  }
+
   setEditorSize = (size: number) => {
     this.props.editEditorSize(size)
   }
@@ -38,6 +51,23 @@ class ActionBar extends React.Component<Props> {
   displayLaptop = () => this.setEditorSize(1024)
   displayTablet = () => this.setEditorSize(768)
   displayPhone = () => this.setEditorSize(375)
+
+  toggleCodeModal = () => {
+    !this.state.codeDialog && this.props.getCode()
+    this.setState({
+      codeDialog: !this.state.codeDialog,
+    })
+  }
+
+  openInWindow = () => {
+    this.props.getCode()
+    setTimeout(() => {
+      var x = window.open()
+      x.document.open()
+      x.document.write(this.props.code)
+      x.document.close()
+    }, 500)
+  }
 
   render() {
     return (
@@ -79,11 +109,16 @@ class ActionBar extends React.Component<Props> {
             <IconButton aria-label="save" iconStyle={styles.iconButton} iconClassName="material-icons">
               &#xE161;
             </IconButton>
-            <IconButton aria-label="fullscreen" iconStyle={styles.iconButton} iconClassName="material-icons">
+            <IconButton
+              onTouchTap={this.openInWindow}
+              aria-label="fullscreen"
+              iconStyle={styles.iconButton}
+              iconClassName="material-icons"
+            >
               &#xE5D0;
             </IconButton>
             <IconButton
-              onTouchTap={this.props.getCode}
+              onTouchTap={this.toggleCodeModal}
               aria-label="code"
               iconStyle={styles.iconButton}
               iconClassName="material-icons"
@@ -95,6 +130,9 @@ class ActionBar extends React.Component<Props> {
             </IconButton>
           </div>
         </div>
+        <Dialog open={this.state.codeDialog} onRequestClose={this.toggleCodeModal} autoScrollBodyContent={true}>
+          <pre style={styles.code}>{prettyPrint(this.props.code)}</pre>
+        </Dialog>
       </Paper>
     )
   }
@@ -119,6 +157,12 @@ const styles = {
   },
   iconButton: {
     color: colors.light,
+  },
+  code: {
+    padding: 0,
+    margin: 0,
+    fontFamily: "Monospace",
+    fontSize: "12px",
   },
 }
 

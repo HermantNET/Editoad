@@ -62,11 +62,11 @@ class Editor extends React.Component<Props> {
 
   render() {
     const { editSelectedElement } = this.props
-    const { width, scale } = this.calcWidth()
+    const { width /*scale*/ } = this.calcWidth()
     return (
       <div style={styles.wrapper} ref={element => (this.element = element)} onTouchTap={editSelectedElement}>
         <Paper style={Object.assign({}, styles.document, { width /* transform: `scale(${scale})` */ })}>
-          <Document />
+          <Document id="melons-document" />
         </Paper>
       </div>
     )
@@ -77,12 +77,14 @@ const styles: { [string]: Object } = {
   wrapper: {
     flex: "1",
     display: "flex",
-    paddingTop: "12px",
+    paddingTop: "48px",
+    paddingBottom: "24px",
     alignItems: "flex-start",
     justifyContent: "center",
     backgroundColor: colors.dim,
     overflowX: "hidden",
     overflowY: "scroll",
+    position: "relative",
   },
   document: {
     float: "left",
