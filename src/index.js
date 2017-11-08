@@ -25,12 +25,19 @@ const store: Object = createStore(
    MuiThemeProvider is a dependency for Material-UI components. 
    Provider allows the store to be accessed by our React components.
 */
-ReactDOM.render(
-  <MuiThemeProvider>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </MuiThemeProvider>,
-  document.getElementById("root")
+const _App = (
+  <Provider store={store}>
+    <App />
+  </Provider>
 )
+
+const AppWithProvider = (
+  <MuiThemeProvider>
+    <_App />
+  </MuiThemeProvider>
+)
+
+//ReactDOM.render(AppWithProvider, document.getElementById("root"))
 // registerServiceWorker();
+
+export default _App
