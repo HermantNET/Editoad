@@ -5,6 +5,8 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "./dist/editoad.js",
+    library: "editoad",
+    libraryTarget: "umd",
   },
   module: {
     loaders: [
