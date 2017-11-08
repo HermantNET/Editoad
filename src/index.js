@@ -17,7 +17,7 @@ injectTapEventPlugin()
 // setup the store
 const store: Object = createStore(
   reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(thunk)
 )
 
@@ -25,7 +25,7 @@ const store: Object = createStore(
    MuiThemeProvider is a dependency for Material-UI components. 
    Provider allows the store to be accessed by our React components.
 */
-class _App extends React.Component<*> {
+export default class _App extends React.Component<*> {
   render() {
     return (
       <Provider store={store}>
@@ -45,7 +45,5 @@ export class AppWithProvider extends React.Component<*> {
   }
 }
 
-//ReactDOM.render(AppWithProvider, document.getElementById("root"))
+// ReactDOM.render(<AppWithProvider />, document.getElementById("root"))
 // registerServiceWorker();
-
-export default _App
