@@ -1,6 +1,6 @@
 {
   "name": "editoad",
-  "main": "./src/index.js",
+  "main": "./dist/editoad.js",
   "version": "0.2.1",
   "private": true,
   "homepage": "http://tehjr.com/Editoad",
