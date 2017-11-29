@@ -172,12 +172,12 @@ class TableCell extends React.Component<Props, { isOver: boolean, mouseOver: boo
           align={align}
           valign={valign}
           colSpan={flex}
-          onTouchTap={this.selectElement}
+          onClick={this.selectElement}
         >
           <div style={Object.assign({}, styleInner, isOverStyle)}>{content}</div>
           {mouseOver && !isOver && type !== "Empty" ? (
             <div style={styles.trashWrapper}>
-              <div style={styles.trash} onTouchTap={this.deleteColumn}>
+              <div style={styles.trash} onClick={this.deleteColumn}>
                 <i className="material-icons">delete</i>
               </div>
             </div>

@@ -6,7 +6,6 @@ module.exports = {
   output: {
     filename: "./dist/editoad.js",
     library: "editoad",
-    libraryTarget: "umd",
   },
   module: {
     loaders: [

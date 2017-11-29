@@ -75,22 +75,22 @@ class ActionBar extends React.Component<Props, { codeDialog: boolean }> {
         <div style={styles.groups}>
           <Tabs>
             <Tab
-              onTouchTap={this.displayFull}
+              onClick={this.displayFull}
               style={styles.tab}
               icon={<FontIcon className="material-icons">&#xE30C;</FontIcon>}
             />
             <Tab
-              onTouchTap={this.displayLaptop}
+              onClick={this.displayLaptop}
               style={styles.tab}
               icon={<FontIcon className="material-icons">&#xE31E;</FontIcon>}
             />
             <Tab
-              onTouchTap={this.displayTablet}
+              onClick={this.displayTablet}
               style={styles.tab}
               icon={<FontIcon className="material-icons">&#xE331;</FontIcon>}
             />
             <Tab
-              onTouchTap={this.displayPhone}
+              onClick={this.displayPhone}
               style={styles.tab}
               icon={<FontIcon className="material-icons">&#xE32C;</FontIcon>}
             />
@@ -110,7 +110,7 @@ class ActionBar extends React.Component<Props, { codeDialog: boolean }> {
               &#xE161;
             </IconButton>
             <IconButton
-              onTouchTap={this.openInWindow}
+              onClick={this.openInWindow}
               aria-label="fullscreen"
               iconStyle={styles.iconButton}
               iconClassName="material-icons"
@@ -118,7 +118,7 @@ class ActionBar extends React.Component<Props, { codeDialog: boolean }> {
               &#xE5D0;
             </IconButton>
             <IconButton
-              onTouchTap={this.toggleCodeModal}
+              onClick={this.toggleCodeModal}
               aria-label="code"
               iconStyle={styles.iconButton}
               iconClassName="material-icons"

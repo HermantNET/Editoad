@@ -51,7 +51,7 @@ class Layout extends React.Component<Props, *> {
       <Table onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
         <Component content={content} data={columnData} rowIndex={rowIndex} />
         {isOver && (
-          <div onTouchTap={deleteRow.bind(this, rowIndex)} style={styles.menu}>
+          <div onClick={deleteRow.bind(this, rowIndex)} style={styles.menu}>
             <i className="material-icons">delete</i>
           </div>
         )}

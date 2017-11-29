@@ -1,9 +1,18 @@
 {
   "name": "editoad",
-  "main": "./index.js",
+  "main": "./src/index.js",
   "version": "0.2.1",
   "private": true,
   "homepage": "http://tehjr.com/Editoad",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "flow": "flow"
+  },
   "dependencies": {
     "flow-bin": "^0.57.3",
     "html": "^1.0.0",
@@ -16,20 +25,10 @@
     "react-quill": "^1.1.0",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.14",
-    "react-tap-event-plugin": "^3.0.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "style-data": "^1.1.2",
     "uuid": "https://registry.npmjs.org/uuid/-/uuid-3.1.0.tgz"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "flow": "flow"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

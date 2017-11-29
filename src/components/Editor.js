@@ -64,7 +64,7 @@ class Editor extends React.Component<Props> {
     const { editSelectedElement } = this.props
     const { width /*scale*/ } = this.calcWidth()
     return (
-      <div style={styles.wrapper} ref={element => (this.element = element)} onTouchTap={editSelectedElement}>
+      <div style={styles.wrapper} ref={element => (this.element = element)} onClick={editSelectedElement}>
         <Paper style={Object.assign({}, styles.document, { width /* transform: `scale(${scale})` */ })}>
           <Document id="melons-document" />
         </Paper>
